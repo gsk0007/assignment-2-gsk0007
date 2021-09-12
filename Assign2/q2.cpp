@@ -1,4 +1,4 @@
-#include <iostream>;
+#include <iostream>
 
 using namespace std;
 
@@ -37,12 +37,23 @@ int main() {
 }
 
 void computeCoin(int coinValue, int& number, int& amountLeft) {
-	
+	number = amountLeft/coinValue;
+	amountLeft = amountLeft%coinValue;
 }
 
 void printOutput(int coinValue, int number) {
 	cout << number;
-	switch(coinValue) {
-		
-	}
+	switch (coinValue)
+	{
+	case 25:
+		cout << " Quarters\n";
+		break;
+	case 10:
+		cout << " Dimes\n";
+		break;
+	case 1:
+		cout << " Pennies\n";
+	default:
+		break;
+	};
 }
