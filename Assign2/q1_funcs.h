@@ -160,14 +160,38 @@ void dateCheck(std::string dateString){
     int month = stoi(dateString.substr(0,2));
     int day = stoi(dateString.substr(3,2));
     int year = stoi(dateString.substr(6,4));
+    bool leapYear = isLeapYear(year);
+
     if(month<1 || month>12){
         std::cout << "Please check the month and try again\n";
         getDate(dateString);
     };
-    if(day<1 || day>31){
-        std::cout << "Please check the day and try again\n";
-        getDate(dateString);
+
+    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+        if(day<1 || day>31){
+            std::cout << "Please check the day and try again\n";
+            getDate(dateString);
+        };
+    } else if(month == 4 || month == 6 || month == 9 || month == 11){
+        if(day<1 || day>30){
+            std::cout << "Please check the day and try again\n";
+            getDate(dateString);
+        };
+    } else if(month == 2 && leapYear){
+        if(day<1 || day>29){
+            std::cout << "Please check the day and try again\n";
+            getDate(dateString);
+        };
+    } else if(month == 2 && !leapYear){
+        if(day<1 || day>28){
+            std::cout << "Please check the day and try again\n";
+            getDate(dateString);
+        };
+    } else{
+        exit(1);
     };
+    
+
     if(year<1){
         std::cout << "Please check the year and try again\n";
         getDate(dateString);
