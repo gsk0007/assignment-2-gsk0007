@@ -1,121 +1,44 @@
-#include<iostream>
-#include<String>
+#include <iostream>
+#include <string>
+// Import all needed user defined functions for finding the day of the week
+#include "q1_funcs.h"
+using namespace std;
+// todo flesh out input validation. The day input validation needs to actually work.
+int main(){ 
+    // initialize variables needed for calculations
+    string dateString;
+    int month;
+    int day;
+    int year;
+    int MonthVal;
+    int YearVal;
+    int CenturyVal;
+    int dayResult;
+    string dayResultString;
+    
+    // get the date using the getDate Function. This also calls
+    // the dateCheck function to make sure (lazily) that the date is valid.
+    getDate(dateString);
 
-using namespace std; 
+    // parse the values needed for calculations out of the string
+    month = stoi(dateString.substr(0,2));
+    day = stoi(dateString.substr(3,2));
+    year = stoi(dateString.substr(6,4));
 
-bool isleapYear(int year);
-int getCenturyValue (int year); 
-int getYearValue(int year);
-int getMonthValue(int month, int year);
+    // Using the parsed values from above, call the functions specific for
+    // calculating the day of the week
+    MonthVal = getMonthValue(month, year);
+    YearVal = getYearValue(year);
+    CenturyVal = getCenturyValue(year);
 
-int main() {
-  
-    int month,
-        day = 0, 
-        year = 0, 
-        sum = 0,
-        day_of_week = 0;
-    string day_string = ""; 
-
-    cout << "enter the month"<< endl; 
-
-    cin >> month; 
-
-    while (month < 1 || month > 12){
-
-        cout << "please give a valid month";
-        cin >> month; 
-    }
-
-    cout << "enter a day" << endl;
-
-    cin >> day; 
-
-    if (month == 4 || month == 6|| month == 9 || month ==11 ){
-
-        while (day < 1 || day > 30) {
-			cout << "Enter a value between 1 and 30:";
-			cin  >> day;
-		}
-
-
-
-    }
-    // Calculate the day of week
-	sum = day + getMonthValue(month,year) + getYearValue(year) + getCenturyValue(year);
-	day_of_week = sum % 7;
-	
-	// Find corresponding day name
-	switch(day_of_week) {
-
-        case 0: 
-           day_string = "Sunday"; 
-           break; 
-
-        case 1:
-        case 2:
-        case 3: 
-    }
-
-    cout << ;
-    return 0; 
-
-}
-
-bool isLeapYear(int year) {
-	// Leap year is divisible by 400 or divisible by 4 and not 100
-	return ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0));
-}
-
-int getCenturyValue(int year) {
-	int century = 0,
-	    century_value = 0;
-
-	century = year / 100;
-	century_value = (3 - (century % 4)) * 2;
-	return century_value;
-}
-
-int getYearValue(int year) {
-	int year_value = 0;
-
-	
-}
-
-int getMonthValue(int month, int year) {
-	switch(month) {
-		case 1:
-			if (isLeapYear(year))
-				return 6;
-			else
-				return 0;
-		case 2:
-			if (isLeapYear(year))
-				return 2;
-			else
-				return 3;
-		case 3:
-			return 3;
-		case 4:
-			return 6;
-		case 5:
-			return 1;
-		case 6:
-			return 4;
-		case 7:
-			return 6;
-		case 8:
-			return 2;
-		case 9:
-			return 5;
-		case 10:
-			return 0;
-		case 11:
-			return 3;
-		case 12:
-			return 5;
-	}			
-}
-
+    // Calculate number for determining the day of the week
+    dayResult = (day + MonthVal + YearVal + CenturyVal)%7;
+    
+    // Call a function to get the day as a string
+    dayResultString = getDayString(dayResult);
+    // output day that is the date
+    cout << dayResultString;
+    return 0;
+};
 
 
