@@ -3,7 +3,7 @@
 // Import all needed user defined functions for finding the day of the week
 #include "q1_funcs.h"
 using namespace std;
-// todo flesh out input validation. The day input validation needs to actually work.
+
 int main(){ 
     // initialize variables needed for calculations
     string dateString;
