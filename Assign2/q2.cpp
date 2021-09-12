@@ -2,14 +2,18 @@
 
 using namespace std;
 
+// Two functions used to compute change and display number of coins
 void computeCoin(int coinValue, int& number, int& amountLeft);
 void printOutput(int coinValue, int number);
 
 int main() {
+	// initialize variables needed for calculations
 	char compute_again = 'N';
 	int number = 0,
 	    amountLeft = 0;
-
+	
+	// prompt user to input change, check validity, and they display coins.
+	// Uses a do while loop to allow multiple change calculations
 	do {
 		cout << "Enter the amount of change:";
 		cin  >> amountLeft;
